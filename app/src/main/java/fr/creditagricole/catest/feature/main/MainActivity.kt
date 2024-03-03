@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import dagger.hilt.android.AndroidEntryPoint
 import fr.creditagricole.catest.data.model.Account
+import fr.creditagricole.catest.feature.accountdetail.AccountDetailActivity
 import fr.creditagricole.catest.ui.theme.CATestTheme
 
 @AndroidEntryPoint
@@ -45,6 +46,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun openAccountDetail(account: Account) {
+        startActivity(AccountDetailActivity.getIntent(this, account))
     }
 
     private fun setErrorHandled(error: ErrorType) {

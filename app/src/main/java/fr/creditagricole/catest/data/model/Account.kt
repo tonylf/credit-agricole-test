@@ -1,5 +1,7 @@
 package fr.creditagricole.catest.data.model
 
+import java.io.Serializable
+
 data class Account(
     val order: Int,
     val id: String,
@@ -10,4 +12,4 @@ data class Account(
     val productCode: String,
     val balance: Double,
     val operations: List<Operation>
-)
+) : Serializable

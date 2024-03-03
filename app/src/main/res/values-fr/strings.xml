@@ -4,6 +4,7 @@
 
     <string name="ok">OK</string>
     <string name="error">Erreur</string>
+    <string name="back">Retour</string>
 
     <string name="my_accounts">Mes comptes</string>
     <string name="no_account">Vous n\'avez pas de compte</string>
@@ -12,4 +13,6 @@
     <string name="other_banks">Autres banques</string>
     <string name="open_bank_accounts_list">Ouvrir la liste des compte de la banque</string>
     <string name="open_account_details">Ouvrir les détails du compte</string>
+
+    <string name="no_operation">Aucune opération sur ce compte</string>
 </resources>

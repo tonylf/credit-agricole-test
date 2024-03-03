@@ -1,5 +1,6 @@
 package fr.creditagricole.catest.data.model
 
+import java.io.Serializable
 import java.util.Date
 
 data class Operation(
@@ -8,4 +9,4 @@ data class Operation(
     val amount: String,
     val category: String,
     val date: Date
-)
+) : Serializable
