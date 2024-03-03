@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CA Test</string>
+
+    <string name="ok">OK</string>
+    <string name="error">Erreur</string>
+
+    <string name="my_accounts">Mes comptes</string>
+    <string name="no_account">Vous n\'avez pas de compte</string>
+    <string name="get_accounts_error">Une erreur est survenue lors de la récupération de vos comptes, merci de réessayer plus tard</string>
+    <string name="credit_agricole">Crédit Agricole</string>
+    <string name="other_banks">Autres banques</string>
+    <string name="open_bank_accounts_list">Ouvrir la liste des compte de la banque</string>
+    <string name="open_account_details">Ouvrir les détails du compte</string>
+</resources>

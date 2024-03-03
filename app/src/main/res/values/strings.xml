@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">CA Test</string>
+
+    <string name="ok">OK</string>
+    <string name="error">Error</string>
+    
+    <string name="my_accounts">My accounts</string>
+    <string name="no_account">You don\'t have any account</string>
+    <string name="get_accounts_error">An error occurred while retrieving your accounts, please try again later</string>
+    <string name="credit_agricole">Crédit Agricole</string>
+    <string name="other_banks">Other banks</string>
+    <string name="open_bank_accounts_list">Open bank accounts list</string>
+    <string name="open_account_details">Open account details</string>
 </resources>
