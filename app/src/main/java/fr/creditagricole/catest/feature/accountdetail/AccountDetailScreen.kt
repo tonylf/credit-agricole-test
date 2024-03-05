@@ -25,8 +25,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import fr.creditagricole.catest.DateUtils
 import fr.creditagricole.catest.R
 import fr.creditagricole.catest.data.model.Account
@@ -37,9 +40,8 @@ import java.util.Date
 @Composable
 fun AccountDetailScreen(
     account: Account,
-    onBackButtonClick: () -> Unit,
-
-    ) {
+    onBackButtonClick: () -> Unit
+) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -57,7 +59,7 @@ fun AccountDetailScreen(
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = stringResource(id = R.string.back),
-                            tint = Color.White
+                            tint = Color.Black
                         )
                     }
                 }
@@ -72,12 +74,16 @@ fun AccountDetailScreen(
             LazyColumn {
                 item {
                     Text(
-                        text = String.format("%.2f", account.balance),
+                        text = String.format("%.2f €", account.balance),
                         modifier = Modifier
-                            .padding(dimensionResource(id = R.dimen.padding_small))
+                            .fillMaxWidth()
+                            .padding(dimensionResource(id = R.dimen.padding_small)),
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = TextUnit(24F, TextUnitType.Sp),
+                        textAlign = TextAlign.Center
                     )
                 }
-                items(account.operations) { operation ->
+                items(account.operations.sortedByDescending { operation -> operation.date }) { operation ->
                     OperationItem(operation = operation)
                 }
             }
@@ -116,14 +122,16 @@ fun OperationItem(
                 )
                 Text(
                     text = DateUtils.formatDate(operation.date),
-                    modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
+                    modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_large))
                 )
             }
             Row(
-                modifier = Modifier.align(Alignment.TopEnd)
+                modifier = Modifier
+                    .padding(dimensionResource(id = R.dimen.padding_small))
+                    .align(Alignment.CenterEnd)
             ) {
                 Text(
-                    text = operation.amount,
+                    text = "${operation.amount} €",
                     modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small)),
                     fontWeight = FontWeight.Light
                 )
@@ -151,14 +159,14 @@ fun AccountDetailScreenPreview() {
                     "Retrait au distributeur",
                     "30,00",
                     "Retrait",
-                    Date(1709303935)
+                    Date(1709303935000)
                 ),
                 Operation(
                         "2",
                 "Paiement en chèque",
                 "53,84",
                 "Chèque",
-                Date(1709390335)
+                Date(1709390335000)
             )
             )
         ),

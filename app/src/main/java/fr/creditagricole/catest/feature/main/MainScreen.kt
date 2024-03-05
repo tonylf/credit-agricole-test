@@ -37,7 +37,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import fr.creditagricole.catest.R
 import fr.creditagricole.catest.data.model.Account
 import fr.creditagricole.catest.data.model.Bank
@@ -127,7 +126,7 @@ fun BankItem(
     bank: Bank,
     onAccountClick: (Account) -> Unit
 ) {
-    var isAccountsListOpened by remember { mutableStateOf(false) }
+    var isAccountsListOpened by remember { mutableStateOf(true) }
 
     Card(
         modifier = Modifier
@@ -147,26 +146,30 @@ fun BankItem(
                     fontWeight = FontWeight.SemiBold
                 )
                 Row(
-                    modifier = Modifier.align(Alignment.TopEnd)
+                    modifier = Modifier.align(Alignment.CenterEnd)
                 ) {
                     Text(
                         text = String.format(
-                            "%.2f",
+                            "%.2f €",
                             bank.accounts.sumOf { account -> account.balance }),
-                        modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small)),
-                        fontWeight = FontWeight.Light
+                        modifier = Modifier
+                            .padding(dimensionResource(id = R.dimen.padding_small))
+                            .align(Alignment.CenterVertically),
+                        fontWeight = FontWeight.Light,
+                        color = Color.Gray
                     )
                     Icon(
                         imageVector = if (isAccountsListOpened) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
+                        modifier = Modifier.align(Alignment.CenterVertically),
                         contentDescription = stringResource(id = R.string.open_bank_accounts_list),
-                        tint = Color.Black
+                        tint = Color.Gray
                     )
                 }
             }
 
             if (isAccountsListOpened) {
                 Column {
-                    for (account in bank.accounts) {
+                    for (account in bank.accounts.sortedBy { account -> account.label }) {
                         AccountItem(
                             account = account,
                             onAccountClick = onAccountClick
@@ -188,7 +191,6 @@ fun AccountItem(
             .fillMaxWidth()
             .padding(dimensionResource(id = R.dimen.padding_small))
             .clickable { onAccountClick(account) },
-        shape = RoundedCornerShape(5.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation()
     ) {
@@ -203,17 +205,21 @@ fun AccountItem(
                 fontWeight = FontWeight.SemiBold
             )
             Row(
-                modifier = Modifier.align(Alignment.TopEnd)
+                modifier = Modifier.align(Alignment.CenterEnd)
             ) {
                 Text(
-                    text = account.balance.toString(),
-                    modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small)),
-                    fontWeight = FontWeight.Light
+                    text = String.format("%.2f €", account.balance),
+                    modifier = Modifier
+                        .padding(dimensionResource(id = R.dimen.padding_small))
+                        .align(Alignment.CenterVertically),
+                    fontWeight = FontWeight.Light,
+                    color = Color.Gray
                 )
                 Icon(
                     imageVector = Icons.Filled.KeyboardArrowRight,
+                    modifier = Modifier.align(Alignment.CenterVertically),
                     contentDescription = stringResource(id = R.string.open_account_details),
-                    tint = Color.Black
+                    tint = Color.Gray
                 )
             }
         }
